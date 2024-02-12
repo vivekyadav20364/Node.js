@@ -1,0 +1,44 @@
+𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻 𝟭 : 𝗪𝗵𝗮𝘁 𝗶𝘀 𝗳𝗼𝗿𝗸 𝗶𝗻 𝗻𝗼𝗱𝗲 𝗷𝘀
+𝗔𝗻𝘀𝘄𝗲𝗿 : 
+In Node.js, the term "fork" is commonly associated with the child_process module, and specifically, the fork method within that module. 
+This method is used to create a new Node.js process, often referred to as a "child process," which runs in a separate V8 engine instance. 
+The primary use case for forking is to run multiple instances of a script concurrently.
+
+Child Process: When you fork a process using child_process.fork, it creates a new Node.js process that is an independent instance of the V8 engine.
+
+Communication: The parent and child processes can communicate with each other through inter-process communication (IPC). This allows data to be sent and received between the parent and child processes.
+
+Use Cases: Forking is commonly used for scenarios where parallel execution of tasks is beneficial, such as running multiple workers to perform computationally intensive operations concurrently.
+
+Here's a basic example:
+
+javascript
+Copy code
+// parent.js
+const { fork } = require('child_process');
+
+// Fork a child process
+const childProcess = fork('child.js');
+
+// Send data to the child process
+childProcess.send({ message: 'Hello from parent' });
+
+// Listen for messages from the child process
+childProcess.on('message', (message) => {
+  console.log('Parent received:', message);
+});
+javascript
+Copy code
+// child.js
+process.on('message', (message) => {
+  console.log('Child received:', message);
+
+  // Send a response back to the parent process
+  process.send({ reply: 'Hello from child' });
+});
+In this example:
+
+The parent.js script forks a child process (child.js).
+The parent sends a message to the child process.
+The child process receives the message, logs it, and sends a reply back to the parent.
+The parent process listens for messages from the child and logs the reply.
