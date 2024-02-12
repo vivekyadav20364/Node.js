@@ -42,3 +42,16 @@ The parent.js script forks a child process (child.js).
 The parent sends a message to the child process.
 The child process receives the message, logs it, and sends a reply back to the parent.
 The parent process listens for messages from the child and logs the reply.
+
+𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻 𝟮 : 𝗪𝗵𝘆 𝗻𝗼𝗱𝗲.𝗷𝘀 𝗶𝘀 𝘀𝗶𝗻𝗴𝗹𝗲 𝘁𝗵𝗿𝗲𝗮𝗱𝗲𝗱
+𝗔𝗻𝘀𝘄𝗲𝗿:
+Node.js is designed to be single-threaded to maximize its efficiency in handling asynchronous I/O operations. 
+This design choice is rooted in the event-driven, non-blocking nature of Node.js, which aims to optimize the handling of concurrent connections and asynchronous tasks
+
+Asynchronous and Non-blocking: Node.js uses an event-driven architecture that employs an event loop to handle asynchronous operations efficiently. This allows Node.js to handle a large number of connections concurrently without the need for threads.
+
+Single-threaded Event Loop: Node.js operates on a single thread, managed by the event loop. The event loop continuously checks for events and executes callback functions associated with those events.
+
+It's important to note that while the JavaScript code runs in a single thread, 
+Node.js can take advantage of underlying system-level threads for certain operations (e.g., file system operations) using worker threads or by utilizing libuv,
+the underlying library for handling I/O operations in Node.js. However, the main event loop remains single-threaded.
